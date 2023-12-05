@@ -4,6 +4,12 @@
 <div class="row">
     <div class="col-12">
         <div class="card">
+            @if(session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
+
             <div class="card-body">
 
                 <form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data">
@@ -18,7 +24,7 @@
                         <span class="text-danger">{{ $errors->first('name') }}</span>
                     @endif
 
-                    <div class="row mb-3">
+                    {{-- <div class="row mb-3">
                         <label for="example-text-input" class="col-sm-2 col-form-label">Фамилия</label>
                         <div class="col-sm-10">
                             <input class="form-control" type="text" placeholder="Artisanal kale" id="example-text-input" value="test_value" name="surname">
@@ -26,7 +32,7 @@
                     </div>
                     @if ($errors->has('surname'))
                         <span class="text-danger">{{ $errors->first('surname') }}</span>
-                    @endif
+                    @endif --}}
 
                     <div class="row mb-3">
                         <label for="example-email-input" class="col-sm-2 col-form-label">Почта</label>

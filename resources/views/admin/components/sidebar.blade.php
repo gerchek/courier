@@ -29,7 +29,7 @@
         
 
 
-        {{-- @if (auth()->check()) @if (auth()->user()->type == 1 )  --}}
+        @if (auth()->check()) @if (auth()->user()->type == "admin" ) 
 
         <li>
             <a href="{{route('user.index')}}" class=" waves-effect">
@@ -37,7 +37,21 @@
                 <span>Users</span>
             </a>
         </li>
-        {{-- @endif @endif --}}
+        @endif @endif
+
+        <li>
+            <a href="{{route('courier.index')}}" class=" waves-effect">
+                <i class="ri-calendar-2-line"></i>
+                <span>Couriers</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="{{route('parcel.index')}}" class=" waves-effect">
+                <i class="ri-calendar-2-line"></i>
+                <span>Parcels</span>
+            </a>
+        </li>
 
 
         <!-- <li>

@@ -50,11 +50,11 @@
                         </div>
                         <div class="card-body position-relative">
                             <div class="p-4 mt-n5 card rounded">
-                                <form class="form-horizontal" action="{{ route('admin-validate_login') }}" method="post">
+                                <form class="form-horizontal" action="{{ route('courier-validate_login') }}" method="post">
                                     @csrf
                                     <div class="mb-3">
                                         <label for="name" class="form-label">Login</label>
-                                        <input type="text" class="form-control" id="name" placeholder="Enter login" name="name">
+                                        <input type="email" class="form-control" id="name" placeholder="Enter login" name="email">
                                     </div>
                                     @if($errors->has('name'))
                                         <span class="text-danger">{{ $errors->first('name') }}</span>

@@ -53,11 +53,11 @@ class AuthController extends Controller
     function validate_login(Request $request)
     {
         $request->validate([
-            'email' =>  'required',
+            'name' =>  'required',
             'password'  =>  'required'
         ]);
 
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->only('name', 'password');
         // dd(Auth::attempt($credentials));
         // dd($credentials);
 
@@ -67,7 +67,6 @@ class AuthController extends Controller
             // dd($type->type);
             if ( $type['type'] == "admin" || $type['type'] == "support" || $type['type'] == "users" ) {
                 return redirect()->route('backend');
-                dd("hi");
             }
 
             return redirect()->route('login')->with('success', 'Login details are not valid');

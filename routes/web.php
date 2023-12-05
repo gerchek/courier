@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
- Route::get('/reset_password', function () {
-     dd("можем продолжить общение в телеграмме, мой аккаунт в телеграмме @gerchek1999, буду ждать");
- });
+//  Route::get('/reset_password', function () {
+//      dd("можем продолжить общение в телеграмме, мой аккаунт в телеграмме @gerchek1999, буду ждать");
+//  });
 
 require_once "admin.php"; 
 

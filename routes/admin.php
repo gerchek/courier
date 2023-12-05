@@ -4,8 +4,11 @@ use Illuminate\Support\Facades\Route;
 // ******************************************************************TOUR START
 
 use App\Http\Controllers\Admin\Auth\AuthController;
+use App\Http\Controllers\Admin\Auth\CourierAuthController;
 use App\Http\Controllers\Admin\Auth\ProfileController;
 use App\Http\Controllers\Admin\Auth\UserController;
+use App\Http\Controllers\Admin\CourierController;
+use App\Http\Controllers\Admin\ParcelController;
 
 
 Route::get('/login', [AuthController::class, 'login'])->name('login'); 
@@ -24,6 +27,15 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::resource('user', UserController::class,['names' => 'user']);
     
 });
+
+Route::resource('courier', CourierController::class,['names' => 'courier']);
+Route::resource('parcel', ParcelController::class,['names' => 'parcel']);
+
+Route::get('/login_courier', [CourierAuthController::class, 'login'])->name('login_courier'); 
+Route::post('/courier_validate_login', [CourierAuthController::class, 'validate_login'])->name('courier-validate_login');
+
+
+
 
 
 

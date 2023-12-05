@@ -1,6 +1,10 @@
 @extends('admin.layout.master')
 @section('content')
-<a href="{{route('user.create')}}"><button type="button" class="btn btn-success waves-effect waves-light"><i class="ri-check-line align-middle me-2"></i> Create User</button></a>
+
+@if (auth()->check()) @if (auth()->user()->type != "users" ) 
+<a href="{{route('parcel.create')}}"><button type="button" class="btn btn-success waves-effect waves-light"><i class="ri-check-line align-middle me-2"></i> Create Parcel</button></a>
+@endif @endif
+
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -11,34 +15,22 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Type</th>
                         <th>Edit</th>
+                        @if (auth()->check()) @if (auth()->user()->type != "users" ) 
                         <th>Delete</th>
+                        @endif @endif
                     </tr>
                     </thead>
 
 
                     <tbody>
-                    @foreach ($users as $user)
+                    @foreach ($parcels as $parcel)
                     <tr>
-                        <td>{{ $user->id }}</td>
-                        <td>{{ $user->name }}</td>
-
-                        <td style="width: 300px">
-
-                            @if ($user->type == "admin")
-                                admin 
-                            @endif 
-                            @if ($user->type == "support")
-                                support
-                            @endif 
-                            @if ($user->type == "users")
-                                users 
-                            @endif 
-                        </td>
+                        <td>{{ $parcel->id }}</td>
+                        <td>{{ $parcel->name }}</td>
 
                         <td style="width: 100px">
-                            <a href="{{ route('user.edit',$user->id) }}">
+                            <a href="{{ route('parcel.edit',$parcel->id) }}">
                                 <button type="button" class="btn btn-success waves-effect waves-light">
                                     Edit
                                 </button>
@@ -47,14 +39,15 @@
                         </td>
 
                         
-
+                        @if (auth()->check()) @if (auth()->user()->type != "users" ) 
                         <td style="width: 100px">
-                            <form action="{{ route('user.destroy',$user->id) }}" method="Post">
+                            <form action="{{ route('parcel.destroy',$parcel->id) }}" method="Post">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Delete</button>
                             </form>
                         </td>
+                        @endif @endif
                     </tr>
                     @endforeach
 

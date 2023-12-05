@@ -76,8 +76,18 @@ class UserController extends Controller
             'type' => $request->type,
         ];
         // dd($postData);
-        User::create($postData);
-        return redirect()->route('user.index');
+        
+
+        try {
+            // Your database insertion code here
+            User::create($postData);
+            return redirect()->route('user.index');
+
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
+        }
+
+        
 
     }
 

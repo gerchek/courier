@@ -48,10 +48,15 @@ class User extends Authenticatable
     ];
 
     protected function type(): Attribute
-        {
-            return new Attribute(
-                get: fn ($value) =>  ["admin", "support","users"][$value],
-            );
-        }
+    {
+        return new Attribute(
+            get: fn ($value) =>  ["admin", "support","users"][$value],
+        );
+    }
+
+    public function parcel()
+    {
+        return $this->hasMany(Parcel::class);
+    }
     
 }
