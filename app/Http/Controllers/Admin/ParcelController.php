@@ -21,13 +21,28 @@ class ParcelController extends Controller
     public function index()
     {
         //
-        $user = Auth::user();
 
-        if($user->type == "users"){
-            $parcels = Parcel::where('user_id',$user->id)->get();
-        }else{
-            $parcels = Parcel::all();
+        if (Auth::guard('web')->check()) {
+            $user_web = Auth::guard('web')->user();
+
+            if ($user_web && $user_web->type != null) {
+                if($user_web->type == "users"){
+                    $parcels = Parcel::where('user_id',$user_web->id)->get();
+                }else{
+                    $parcels = Parcel::all();
+                }
+            }else{
+                $parcels = Parcel::all();
+            }
+        }elseif(Auth::guard('courier')->check()){
+            $user_courier = Auth::guard('courier')->user();
+            $parcels = Parcel::where('courier_id',$user_courier->id)->get();
+
         }
+
+
+
+        
 
         return view('admin.pages.parcel.list', ['parcels' => $parcels]);
     }
@@ -52,7 +67,6 @@ class ParcelController extends Controller
     {
         //
         // dd($request->all());
-
 
         $validation = Validator::make( $request->all(), [
             'user_id' => 'required',
@@ -123,53 +137,81 @@ class ParcelController extends Controller
         // dd($request->file);
         $data = Parcel::find($id);
 
-        $validation = Validator::make( $request->all(), [
-            'user_id' => 'required',
-            'courier_id' => 'required',
-    
-            'name' => 'required',
-            'description' => 'required',
-            'shipping_company' => 'required',
-            'tracking_number' => 'required',
-            'status' => 'required',
-        ]);
+        if (Auth::guard('web')->check()) {
+            $validation = Validator::make( $request->all(), [
+                'user_id' => 'required',
+                'courier_id' => 'required',
+        
+                'name' => 'required',
+                'description' => 'required',
+                'shipping_company' => 'required',
+                'tracking_number' => 'required',
+                'status' => 'required',
+            ]);
 
-        if ( $validation->fails() ) {
-            // dd($validation->messages());
-            return \Redirect::back()->withInput()->withErrors( $validation->messages() );
+            if ( $validation->fails() ) {
+                // dd($validation->messages());
+                return \Redirect::back()->withInput()->withErrors( $validation->messages() );
+            }
+
+            if (!is_null($request->file)) {
+                # code...
+                $file = time() . '_' . $request->file->getClientOriginalName();
+                $request->file->storeAs('public/parcels/files', $file);
+                $file_path = 'public/parcels/files/' . $data->file;
+                \Storage::delete($file_path);
+            }elseif(is_null($request->file)){
+                $file = $data->file;
+            }
+
+            // dd($file);
+
+            try {
+
+                $data->user_id = $request->user_id;
+                $data->courier_id = $request->courier_id;
+        
+                $data->name = $request->name;
+                $data->description = $request->description;
+                $data->shipping_company = $request->shipping_company;
+                $data->tracking_number = $request->tracking_number;
+                $data->status = $request->status;
+                $data->file = $file;
+                
+
+                $data->save();
+                return redirect()->route('parcel.index');
+
+            } catch (\Exception $e) {
+                return $e->getMessage();
+            }
+        }elseif(Auth::guard('courier')->check()){
+            $validation = Validator::make( $request->all(), [
+                'status' => 'required',
+            ]);
+
+            if ( $validation->fails() ) {
+                // dd($validation->messages());
+                return \Redirect::back()->withInput()->withErrors( $validation->messages() );
+            }
+
+
+            try {
+
+                $data->status = $request->status;
+
+                $data->save();
+                return redirect()->route('parcel.index');
+
+            } catch (\Exception $e) {
+                return $e->getMessage();
+            }
+
         }
 
-        if (!is_null($request->file)) {
-            # code...
-            $file = time() . '_' . $request->file->getClientOriginalName();
-            $request->file->storeAs('public/parcels/files', $file);
-            $file_path = 'public/parcels/files/' . $data->file;
-            \Storage::delete($file_path);
-        }elseif(is_null($request->file)){
-            $file = $data->file;
-        }
 
-        // dd($file);
 
-        try {
 
-            $data->user_id = $request->user_id;
-            $data->courier_id = $request->courier_id;
-    
-            $data->name = $request->name;
-            $data->description = $request->description;
-            $data->shipping_company = $request->shipping_company;
-            $data->tracking_number = $request->tracking_number;
-            $data->status = $request->status;
-            $data->file = $file;
-            
-
-            $data->save();
-            return redirect()->route('parcel.index');
-
-        } catch (\Exception $e) {
-            return $e->getMessage();
-        }
     }
 
     /**
@@ -180,15 +222,11 @@ class ParcelController extends Controller
         //
         $parcel = Parcel::find($id);
 
-        // $user->tours()->detach();
-        // $user->transfers()->detach();
-
         $file_path = 'public/parcels/files/' . $parcel->file;
         \Storage::delete($file_path);
 
         $parcel->delete();
 
-        // return redirect('/backend');
         return redirect()->route('parcel.index');
     }
 }

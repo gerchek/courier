@@ -25,33 +25,16 @@
                                         <table class="table table-nowrap mb-0">
                                             <tbody>
                                             
-                                                {{-- <tr>
-                                                    <th scope="row" style="width: 400px;">Image for profile</th>
-                                                    <!-- <td><div class="col-md-6"><img class="rounded me-2" alt="200x200" width="200" src="{{ asset('/storage/images/user/') }}/{{auth()->user()->photo}}" data-holder-rendered="true"></div></td> -->
-                                                    <td><a class="image-popup-vertical-fit" href="{{ asset('/storage/images/user/') }}/{{auth()->user()->photo}}" title="Caption. Can be aligned it to any side and contain any HTML.">
-                                                        <img class="img-fluid" alt="img-2" src="{{ asset('/storage/images/user/') }}/{{auth()->user()->photo}}" width="145">
-                                                    </a></td>
-                                                </tr> --}}
                                                 <tr>
                                                     <th scope="row" style="width: 400px;">Имя Админа</th>
                                                     <td> @if (auth()->check()) {{ auth()->user()->name }} @endif </td>
                                                 </tr>
-                                                {{-- <tr>
-                                                    <th scope="row" style="width: 400px;">Фамилия Админа</th>
-                                                    <td> @if (auth()->check()) {{ auth()->user()->surname }} @endif </td>
-                                                </tr> --}}
-                                                {{-- <tr>
-                                                    <th scope="row" style="width: 400px;">Дата рождения Админа</th>
-                                                    <td> @if (auth()->check()) {{ auth()->user()->date_of_birth }} @endif </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row" style="width: 400px;">Телефон Админа</th>
-                                                    <td> @if (auth()->check()) {{ auth()->user()->telephone }} @endif </td>
-                                                </tr> --}}
+
                                                 <tr>
                                                     <th scope="row">Email </th>
                                                     <td> @if (auth()->check()) {{ auth()->user()->email }} @endif </td>
                                                 </tr>
+                                            @auth('web')
                                                 <tr>
                                                     <th scope="row">Type </th>
                                                     <td> @if (auth()->check()) 
@@ -66,10 +49,12 @@
                                                             @endif 
                                                         @endif </td>
                                                 </tr>
-                                                
+                                            @endauth 
                                             </tbody>
                                         </table>
+                                    @auth('web')
                                         <a href="{{ route('admin-profile-update') }}" class="btn btn-success waves-effect waves-light mt-2">Обновить профиль</a>
+                                    @endauth
                                         <a href="{{ route('logout') }}" class="btn btn-primary waves-effect waves-light mt-2">выход</a>
                                     </div>
                                 </div>

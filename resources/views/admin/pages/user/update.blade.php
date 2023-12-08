@@ -50,25 +50,6 @@
                         <span class="text-danger">{{ $errors->first('password') }}</span>
                     @endif
 
-                    {{-- <div class="row mb-3">
-                        <label for="example-tel-input" class="col-sm-2 col-form-label">Телефон</label>
-                        <div class="col-sm-10">
-                            <input class="form-control" type="tel" placeholder="1-(555)-555-5555" id="example-tel-input" name="telephone" value="{{$user->telephone}}">
-                        </div>
-                    </div>
-                    @if ($errors->has('telephone'))
-                        <span class="text-danger">{{ $errors->first('telephone') }}</span>
-                    @endif --}}
-
-                    {{-- <div class="row mb-3">
-                        <label for="example-datetime-local-input" class="col-sm-2 col-form-label">Дата рождения</label>
-                        <div class="col-sm-10">
-                            <input class="form-control" type="date" value="{{ date('Y-m-d', strtotime($user->date_of_birth)) }}" id="example-datetime-local-input" name="date_of_birth">
-                        </div>
-                    </div>
-                    @if ($errors->has('date_of_birth'))
-                        <span class="text-danger">{{ $errors->first('date_of_birth') }}</span>
-                    @endif --}}
 
                     <div class="row mb-3"> 
                         <label class="col-sm-2 col-form-label">уровень пользователя</label>
@@ -87,7 +68,7 @@
                     
 
 
-                    <button type="submit" class="btn btn-success waves-effect waves-light">Update</button>
+                    <button type="submit" class="btn btn-success waves-effect waves-light">Обновлять</button>
 
                 </form>
 

@@ -14,8 +14,11 @@ use App\Http\Controllers\Admin\ParcelController;
 Route::get('/login', [AuthController::class, 'login'])->name('login'); 
 Route::post('validate_login', [AuthController::class, 'validate_login'])->name('admin-validate_login');
 
+Route::get('/login_courier', [CourierAuthController::class, 'login'])->name('login_courier'); 
+Route::post('/courier_validate_login', [CourierAuthController::class, 'validate_login'])->name('courier-validate_login');
 
-Route::middleware(['auth', 'user-access:admin'])->group(function () {
+
+Route::middleware(['auth:web,courier'])->group(function () {
 
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/profile', [ProfileController::class, 'profile'])->name('admin-profile');
@@ -25,14 +28,15 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/', [AuthController::class, 'backend'])->name('backend');
 
     Route::resource('user', UserController::class,['names' => 'user']);
+
+    Route::resource('courier', CourierController::class,['names' => 'courier']);
+    Route::resource('parcel', ParcelController::class,['names' => 'parcel']);
+
     
 });
 
-Route::resource('courier', CourierController::class,['names' => 'courier']);
-Route::resource('parcel', ParcelController::class,['names' => 'parcel']);
 
-Route::get('/login_courier', [CourierAuthController::class, 'login'])->name('login_courier'); 
-Route::post('/courier_validate_login', [CourierAuthController::class, 'validate_login'])->name('courier-validate_login');
+
 
 
 

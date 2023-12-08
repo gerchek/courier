@@ -153,33 +153,12 @@
                     @endif
 
 
-
-                    {{-- <div class="row mb-3">
-                        <label for="example-text-input" class="col-sm-2 col-form-label">IP</label>
-                        <div class="col-sm-10">
-                            <input class="form-control" type="text" id="example-text-input" name="ip_last_login">
-                        </div>
-                    </div>
-                    @if ($errors->has('ip_last_login'))
-                        <span class="text-danger">{{ $errors->first('ip_last_login') }}</span>
-                    @endif
-
-                    <div class="row mb-3">
-                        <label for="example-text-input" class="col-sm-2 col-form-label">последняя дата входа</label>
-                        <div class="col-sm-10">
-                            <input class="form-control" type="text" id="example-text-input" name="last_entry_date">
-                        </div>
-                    </div>
-                    @if ($errors->has('last_entry_date'))
-                        <span class="text-danger">{{ $errors->first('last_entry_date') }}</span>
-                    @endif --}}
-
                     <input type="hidden" name="used" id="used" value="">
 
                     
 
 
-                    <button type="submit" class="btn btn-success waves-effect waves-light">Create</button>
+                    <button type="submit" class="btn btn-success waves-effect waves-light">Создавать</button>
 
                 </form>
 

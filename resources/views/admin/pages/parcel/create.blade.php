@@ -10,7 +10,7 @@
                 @csrf
 
                     <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label">user</label>
+                        <label class="col-sm-2 col-form-label">имя пользователя</label>
                         <div class="col-sm-10">
                                 <select class="form-select" aria-label="Default select example" name="user_id">
 
@@ -23,7 +23,7 @@
                     </div>
 
                     <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label">courier</label>
+                        <label class="col-sm-2 col-form-label">имя курьера</label>
                         <div class="col-sm-10">
                                 <select class="form-select" aria-label="Default select example" name="courier_id">
                                     @foreach($couriers as $courier)
@@ -34,14 +34,14 @@
                     </div>
 
                     <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label">File</label>
+                        <label class="col-sm-2 col-form-label">Файл</label>
                         <div class="col-sm-10">
                             <input type="file" class="form-control" id="customFile" name="file">
                         </div>
                     </div>
 
                     <div class="row mb-3">
-                        <label for="example-text-input" class="col-sm-2 col-form-label">имя</label>
+                        <label for="example-text-input" class="col-sm-2 col-form-label">название посылки</label>
                         <div class="col-sm-10">
                             <input class="form-control" type="text" id="example-text-input" name="name">
                         </div>
@@ -51,7 +51,7 @@
                     @endif
 
                     <div class="row mb-3">
-                        <label for="example-text-input" class="col-sm-2 col-form-label">description</label>
+                        <label for="example-text-input" class="col-sm-2 col-form-label">описание</label>
                         <div class="col-sm-10">
                             <input class="form-control" type="text" id="example-text-input" name="description">
                         </div>
@@ -61,7 +61,7 @@
                     @endif
 
                     <div class="row mb-3">
-                        <label for="example-text-input" class="col-sm-2 col-form-label">shipping_company</label>
+                        <label for="example-text-input" class="col-sm-2 col-form-label">транспортная компания (shipping company)</label>
                         <div class="col-sm-10">
                             <input class="form-control" type="text" id="example-text-input" name="shipping_company">
                         </div>
@@ -71,7 +71,7 @@
                     @endif
 
                     <div class="row mb-3">
-                        <label for="example-text-input" class="col-sm-2 col-form-label">tracking_number</label>
+                        <label for="example-text-input" class="col-sm-2 col-form-label">идентификационный номер (tracking number)</label>
                         <div class="col-sm-10">
                             <input class="form-control" type="text" id="example-text-input" name="tracking_number">
                         </div>
@@ -95,7 +95,7 @@
                         <span class="text-danger">{{ $errors->first('status') }}</span>
                     @endif
 
-                    <button type="submit" class="btn btn-success waves-effect waves-light">Create</button>
+                    <button type="submit" class="btn btn-success waves-effect waves-light">Создавать</button>
 
                 </form>
 

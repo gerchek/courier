@@ -34,36 +34,6 @@ body {background: #f6f6f6; color: #444; font-family: 'Roboto', sans-serif; font-
                     @method('PUT')
                     <h4 class="card-title">Обновить профиль пользователя</h4>
 
-                    {{-- <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label">Image for profile</label>
-                        <div class="col-sm-5">
-                            <main class="main_full">
-                            <div class="container">
-                                <div class="panel">
-                                <div class="button_outer1">
-                                    <div class="btn_upload">
-                                    <input type="file" id="upload_file" name="photo">
-                                    Upload New Image
-                                    </div>
-                                    <div class="processing_bar"></div>
-                                    <div class="success_box"></div>
-                                </div>
-                                </div>
-                                <div class="error_msg"></div>
-                                <div class="uploaded_file_view" id="uploaded_view">
-                                <span class="file_remove">X</span>
-                                </div>
-                            </div>
-                            </main>
-                        </div>
-                        <div class="col-sm-3">
-                            <img class="card-img-top img-fluid"  src="{{ asset('/storage/images/user/') }}/{{auth()->user()->photo}}">
-                        </div>
-                        </div>
-                    @if ($errors->has('description_picture'))
-                        <span class="text-danger">{{ $errors->first('description_picture') }}</span>
-                    @endif --}}
-
                     <div class="row mb-3">
                         <label for="example-text-input" class="col-sm-2 col-form-label">имя :</label>
                         <div class="col-sm-10">

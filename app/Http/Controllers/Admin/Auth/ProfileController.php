@@ -22,31 +22,6 @@ class ProfileController extends Controller
     }
 
 
-    // function validate_profile_update(Request $request, User $user)
-    // {
-    //     $request->validate([
-    //         'name'         =>   'required',
-    //         'email'        =>   'required|email|unique:users',
-    //         'password'     =>   'required|min:6'
-    //     ]);
-
-    //     $data = $request->all();
-    //     dd($user);
-
-    //     // User::create([
-    //     //     'name'  =>  $data['name'],
-    //     //     'email' =>  $data['email'],
-    //     //     'password' => Hash::make($data['password'])
-    //     // ]);
-
-    //     // return redirect()->route('login');
-
-    //     $user = ['title' => $request->title,'data' => $request->data];
-    
-    //     $forwhom->update($postData);
-    //     return redirect('/backend');
-    // }
-
     public function validate_profile_update(Request $request,$id)
     {
         // Validate the updated data

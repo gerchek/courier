@@ -51,9 +51,6 @@ class UserController extends Controller
                 'name' => 'required',
                 'email' => 'required',
                 'password' => 'required',
-                // 'surname' => 'required',
-                // 'telephone' => 'required',
-                // 'date_of_birth' => 'required',
                 'type' => 'required',
             ]);
             
@@ -71,8 +68,6 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            // 'surname' => $request->surname,
-            // 'telephone' => $request->telephone,
             'type' => $request->type,
         ];
         // dd($postData);
@@ -132,9 +127,6 @@ class UserController extends Controller
                 'name' => 'required',
                 'email' => 'required',
                 'password' => 'required',
-                // 'surname' => 'required',
-                // 'telephone' => 'required',
-                // 'date_of_birth' => 'required',
                 'type' => 'required',
             ]);
 
@@ -148,9 +140,6 @@ class UserController extends Controller
             $data->name = $request->name;
             $data->email = $request->email;
             $data->password = Hash::make($request->password);
-            // $data->surname = $request->surname;
-            // $data->telephone = $request->telephone;
-            // $data->date_of_birth = $request->date_of_birth;
             $data->type = $request->type;
             
             $data->save();
@@ -176,9 +165,6 @@ class UserController extends Controller
         //
 
         $user = User::find($id);
-
-        // $user->tours()->detach();
-        // $user->transfers()->detach();
 
         $user->delete();
 

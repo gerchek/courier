@@ -2,7 +2,7 @@
 @section('content')
 
 @if (auth()->check()) @if (auth()->user()->type != "users" ) 
-<a href="{{route('courier.create')}}"><button type="button" class="btn btn-success waves-effect waves-light"><i class="ri-check-line align-middle me-2"></i> Create Courier</button></a>
+<a href="{{route('courier.create')}}"><button type="button" class="btn btn-success waves-effect waves-light"><i class="ri-check-line align-middle me-2"></i> Создать курьера</button></a>
 @endif @endif
 
 <div class="row">
@@ -14,10 +14,12 @@
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Name</th>
+                        <th>Имя</th>
+                        <th>последняя дата входа</th>
+                        <th>IP последний вход</th>
                         @if (auth()->check()) @if (auth()->user()->type != "users" ) 
-                        <th>Edit</th>
-                        <th>Delete</th>
+                        <th>Редактировать</th>
+                        <th>Удалить</th>
                         @endif @endif
                     </tr>
                     </thead>
@@ -28,13 +30,15 @@
                     <tr>
                         <td>{{ $courier->id }}</td>
                         <td>{{ $courier->name }}</td>
+                        <td>{{ $courier->last_entry_date }}</td>
+                        <td>{{ $courier->ip_last_login }}</td>
 
                         @if (auth()->check()) @if (auth()->user()->type != "users" ) 
 
                         <td style="width: 100px">
                             <a href="{{ route('courier.edit',$courier->id) }}">
                                 <button type="button" class="btn btn-success waves-effect waves-light">
-                                    Edit
+                                    Редактировать
                                 </button>
                             </a>
                             
@@ -46,7 +50,7 @@
                             <form action="{{ route('courier.destroy',$courier->id) }}" method="Post">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Delete</button>
+                                <button type="submit" class="btn btn-danger">Удалить</button>
                             </form>
                         </td>
                         @endif @endif

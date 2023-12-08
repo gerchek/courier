@@ -4,10 +4,11 @@ namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Courier;
+use App\Models\User;
 use Hash;
 use Session;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class CourierAuthController extends Controller
 {
@@ -25,21 +26,27 @@ class CourierAuthController extends Controller
             'email' =>  'required',
             'password'  =>  'required'
         ]);
-
-            // Check if the email exists in the Courier model
-        $courier = Courier::where('email', $request->email)->first();
-
-        if ($courier) {
-            // If the email exists, validate the password
-            if (password_verify($request->password, $courier->password)) {
-                // Password is correct, redirect to the desired page
-                return redirect()->route('backend');
-            }
-        }
-
-        // If the email or password is incorrect, redirect back
-        return redirect()->route('login_courier');
     
+        $credentials = $request->only('email', 'password');
+
+        // dd(Auth::guard('courier')->attempt($credentials));
+    
+        if(Auth::guard('courier')->attempt($credentials))
+        {
+            $user_courier = Auth::guard('courier')->user();
+
+            // Update the fields in the Courier model
+            $user_courier->ip_last_login = request()->ip(); // Assuming you want to store the user's IP address
+            $user_courier->last_entry_date = Carbon::now();
+            
+            // Save the changes to the model
+            $user_courier->save();
+        
+        
+            return redirect()->route('backend');
+        }
+    
+        return redirect()->route('login_courier')->with('success', 'Login details are not valid');
     }
 
 

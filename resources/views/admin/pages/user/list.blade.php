@@ -1,6 +1,6 @@
 @extends('admin.layout.master')
 @section('content')
-<a href="{{route('user.create')}}"><button type="button" class="btn btn-success waves-effect waves-light"><i class="ri-check-line align-middle me-2"></i> Create User</button></a>
+<a href="{{route('user.create')}}"><button type="button" class="btn btn-success waves-effect waves-light"><i class="ri-check-line align-middle me-2"></i> Создать пользователя</button></a>
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -10,10 +10,10 @@
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
+                        <th>Имя</th>
+                        <th>Тип</th>
+                        <th>Редактировать</th>
+                        <th>Удалить</th>
                     </tr>
                     </thead>
 
@@ -40,7 +40,7 @@
                         <td style="width: 100px">
                             <a href="{{ route('user.edit',$user->id) }}">
                                 <button type="button" class="btn btn-success waves-effect waves-light">
-                                    Edit
+                                    Редактировать
                                 </button>
                             </a>
                             
@@ -52,7 +52,7 @@
                             <form action="{{ route('user.destroy',$user->id) }}" method="Post">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Delete</button>
+                                <button type="submit" class="btn btn-danger">Удалить</button>
                             </form>
                         </td>
                     </tr>

@@ -36,13 +36,7 @@
             <header id="page-topbar">
                 <div class="navbar-header">
                     <div class="d-flex">
-                            <!-- App Search-->
-                            <!-- <form class="app-search d-none d-lg-block">
-                                <div class="position-relative">
-                                    <input type="text" class="form-control" placeholder="Search...">
-                                    <span class="ri-search-line"></span>
-                                </div>
-                            </form> -->
+
 
                         </div>
 
@@ -64,12 +58,12 @@
                                 </form>
                             </div>
                         </div>
+                            <a href="{{route('admin-profile')}}">
+                                <div class="dropdown d-inline-block user-dropdown">
+                                        <img class="rounded-circle header-profile-user" src="{{ asset('images/admin.jpg') }}" alt="Header Avatar">
+                                </div>
+                            </a>
 
-                        <a href="{{route('admin-profile')}}">
-                            <div class="dropdown d-inline-block user-dropdown">
-                                    <img class="rounded-circle header-profile-user" src="{{ asset('images/admin.jpg') }}" alt="Header Avatar">
-                            </div>
-                        </a>
                     </div>
                 </div>
             </header>
@@ -120,7 +114,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-flex align-items-center justify-content-between">
-                                    <h4 class="mb-0">Dashboard</h4>
+                                    <h4 class="mb-0">Панель</h4>
                                 </div>
                             </div>
                         </div>

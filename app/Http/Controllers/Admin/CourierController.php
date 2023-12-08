@@ -22,16 +22,19 @@ class CourierController extends Controller
     {
         //
         // dd(Auth::getDefaultDriver());
-        $user = Auth::user();
+        $user_web = Auth::guard('web')->user();
         // dd($user);
 
         $couriers = Courier::all();
-
-        if($user->type == "users"){
-            $couriers = $couriers->filter(function ($courier) use ($user){
-                return in_array($user->id, $courier->used);
-            });
+        
+        if ($user_web && $user_web->type != null) {
+            if($user_web->type == "users"){
+                    $couriers = $couriers->filter(function ($courier) use ($user_web){
+                        return in_array($user_web->id, $courier->used);
+                    });
+                }
         }
+        
 
         // dd($couriers);
         
@@ -201,12 +204,8 @@ class CourierController extends Controller
         //
         $courier = Courier::find($id);
 
-        // $user->tours()->detach();
-        // $user->transfers()->detach();
 
         $courier->delete();
-
-        // return redirect('/backend');
         return redirect()->route('courier.index');
     }
 }

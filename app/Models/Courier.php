@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Contracts\Auth\Authenticatable;
 
 
 
-class Courier extends Model
+class Courier extends Model implements Authenticatable
 {
     use HasFactory;
 
@@ -49,6 +50,36 @@ class Courier extends Model
     public function parcel()
     {
         return $this->hasMany(Parcel::class);
+    }
+
+    public function getAuthIdentifierName()
+    {
+        return 'id'; // or the name of the identifier column in your courier table
+    }
+
+    public function getAuthIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getAuthPassword()
+    {
+        return $this->password; // or the name of the password column in your courier table
+    }
+
+    public function getRememberToken()
+    {
+        return $this->remember_token; // or the name of the remember token column in your courier table
+    }
+
+    public function setRememberToken($value)
+    {
+        $this->remember_token = $value;
+    }
+
+    public function getRememberTokenName()
+    {
+        return 'remember_token'; // or the name of the remember token column in your courier table
     }
 
 }

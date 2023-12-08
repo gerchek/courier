@@ -40,10 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        // 'courier' => [
-        //     'driver' => 'session',
-        //     'provider' => 'couriers',
-        // ],
+        'courier' => [
+            'driver' => 'session',
+            'provider' => 'couriers',
+        ],
     ],
 
     /*
@@ -68,10 +68,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-        // 'couriers' => [
-        //     'driver' => 'eloquent',
-        //     'model' => App\Models\Courier::class,
-        // ],
+        'couriers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Courier::class,
+        ],
     ],
 
     /*
